@@ -1,5 +1,5 @@
-# vorp_bathing
-vorp_bathing - rsg-bathing converssion
+# redm_bathing
+redm_bathing - rsg-bathing converssion
 This project is a VORP conversion of the original RSG-Bathing resource.
 
 Credits

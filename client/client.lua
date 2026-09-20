@@ -8,13 +8,13 @@ exports('IsBathingActive', function()
     return LocalPlayer.state.isBathingActive
 end)
 
-RegisterNetEvent('vorp-bathing:client:notify')
-AddEventHandler('vorp-bathing:client:notify', function(message)
+RegisterNetEvent('redm-bathing:client:notify')
+AddEventHandler('redm-bathing:client:notify', function(message)
     VORPcore.NotifyRightTip(message, 4000)
 end)
 
-RegisterNetEvent('vorp-bathing:client:ToggleInvincibility')
-AddEventHandler('vorp-bathing:client:ToggleInvincibility', function(state)
+RegisterNetEvent('redm-bathing:client:ToggleInvincibility')
+AddEventHandler('redm-bathing:client:ToggleInvincibility', function(state)
     LocalPlayer.state.invincible = state
 end)
 
@@ -55,8 +55,8 @@ GetClosestConsumer = function()
     return nil
 end
 
-RegisterNetEvent('vorp-bathing:client:StartBath')
-AddEventHandler('vorp-bathing:client:StartBath', function(town)
+RegisterNetEvent('redm-bathing:client:StartBath')
+AddEventHandler('redm-bathing:client:StartBath', function(town)
     LocalPlayer.state.isBathingActive = true
     currentTown = town
     if Config.BathingZones[town] then
@@ -102,8 +102,8 @@ AddEventHandler('vorp-bathing:client:StartBath', function(town)
 
         TogglePrompts({ "STOP_BATHING", "REQUEST_DELUXE_BATHING", "SCRUB" }, true)
 
-        TriggerEvent("vorp-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { PlayerPedId(), "Script_Mini_Game_Bathing_Regular", `CLIPSET@MINI_GAMES@BATHING@REGULAR@ARTHUR`, `DEFAULT`, "BATHING" })
-        TriggerEvent("vorp-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { rag, "Script_Mini_Game_Bathing_Regular", `CLIPSET@MINI_GAMES@BATHING@REGULAR@RAG`, `DEFAULT`, "BATHING" })
+        TriggerEvent("redm-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { PlayerPedId(), "Script_Mini_Game_Bathing_Regular", `CLIPSET@MINI_GAMES@BATHING@REGULAR@ARTHUR`, `DEFAULT`, "BATHING" })
+        TriggerEvent("redm-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { rag, "Script_Mini_Game_Bathing_Regular", `CLIPSET@MINI_GAMES@BATHING@REGULAR@RAG`, `DEFAULT`, "BATHING" })
 
         ForceEntityAiAndAnimationUpdate(rag, true);
         Citizen.InvokeNative(0x55546004A244302A, PlayerPedId())
@@ -245,8 +245,8 @@ ExitBathing = function()
     LocalPlayer.state.isBathingActive = false
 end
 
-RegisterNetEvent('vorp-bathing:client:StartDeluxeBath')
-AddEventHandler('vorp-bathing:client:StartDeluxeBath', function(town)
+RegisterNetEvent('redm-bathing:client:StartDeluxeBath')
+AddEventHandler('redm-bathing:client:StartDeluxeBath', function(town)
     if not currentAnimScene or not Citizen.InvokeNative(0x25557E324489393C, currentAnimScene) then return end
     Citizen.InvokeNative(0x84EEDB2C6E650000, currentAnimScene)
 
@@ -276,16 +276,16 @@ AddEventHandler('vorp-bathing:client:StartDeluxeBath', function(town)
         Citizen.InvokeNative(0x84EEDB2C6E650000, currentAnimScene)
     end
 
-    TriggerEvent("vorp-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { PlayerPedId(), "Script_Mini_Game_Bathing_Deluxe", `CLIPSET@MINI_GAMES@BATHING@DELUXE@ARTHUR`, `DEFAULT`, "BATHING" })
-    TriggerEvent("vorp-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { BathingPed, "Script_Mini_Game_Bathing_Deluxe", `CLIPSET@MINI_GAMES@BATHING@DELUXE@MAID`, `DEFAULT`, "BATHING" })
+    TriggerEvent("redm-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { PlayerPedId(), "Script_Mini_Game_Bathing_Deluxe", `CLIPSET@MINI_GAMES@BATHING@DELUXE@ARTHUR`, `DEFAULT`, "BATHING" })
+    TriggerEvent("redm-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { BathingPed, "Script_Mini_Game_Bathing_Deluxe", `CLIPSET@MINI_GAMES@BATHING@DELUXE@MAID`, `DEFAULT`, "BATHING" })
 
     TogglePrompts({ "STOP_BATHING", "SCRUB" }, true)
 
     RenderScriptCams(true, true, 0, true, false, 0)
 end)
 
-RegisterNetEvent('vorp-bathing:client:HideDeluxePrompt')
-AddEventHandler('vorp-bathing:client:HideDeluxePrompt', function()
+RegisterNetEvent('redm-bathing:client:HideDeluxePrompt')
+AddEventHandler('redm-bathing:client:HideDeluxePrompt', function()
     TogglePrompts({ "REQUEST_DELUXE_BATHING" }, false)
     TogglePrompts({ "STOP_BATHING", "SCRUB" }, true)
 end)
@@ -309,8 +309,8 @@ ExitPremiumBath = function(disableScrub)
         Citizen.InvokeNative(0x84EEDB2C6E650000, outroScene)
     end
 
-    TriggerEvent("vorp-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { PlayerPedId(), "Script_Mini_Game_Bathing_Regular", `CLIPSET@MINI_GAMES@BATHING@REGULAR@ARTHUR`, `DEFAULT`, "BATHING" })
-    TriggerEvent("vorp-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { BathingPed, "Script_Mini_Game_Bathing_Deluxe", `CLIPSET@MINI_GAMES@BATHING@REGULAR@MAID`, `DEFAULT`, "BATHING" })
+    TriggerEvent("redm-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { PlayerPedId(), "Script_Mini_Game_Bathing_Regular", `CLIPSET@MINI_GAMES@BATHING@REGULAR@ARTHUR`, `DEFAULT`, "BATHING" })
+    TriggerEvent("redm-bathing:TASK_MOVE_NETWORK_BY_NAME_WITH_INIT_PARAMS", { BathingPed, "Script_Mini_Game_Bathing_Deluxe", `CLIPSET@MINI_GAMES@BATHING@REGULAR@MAID`, `DEFAULT`, "BATHING" })
 
     TogglePrompts({ "STOP_BATHING", "SCRUB" }, true)
     if IsPromptEnabled("SCRUB") and disableScrub then TogglePrompts({ "SCRUB" }, false) end
@@ -465,9 +465,9 @@ Action = function(name)
     TogglePrompts("ALL", false)
 
     if (name == "START_BATHING") then
-        TriggerServerEvent("vorp-bathing:server:canEnterBath", currentTown)
+        TriggerServerEvent("redm-bathing:server:canEnterBath", currentTown)
     elseif (name == "REQUEST_DELUXE_BATHING") then
-        TriggerServerEvent("vorp-bathing:server:canEnterDeluxeBath", currentTown)
+        TriggerServerEvent("redm-bathing:server:canEnterDeluxeBath", currentTown)
     elseif (name == "STOP_BATHING") then
         ExitBathing()
     end

@@ -2,8 +2,8 @@ fx_version 'cerulean'
 rdr3_warning 'I acknowledge that this is a prerelease build of RedM, and I am aware my resources *will* become incompatible once RedM ships.'
 game 'rdr3'
 
-name 'vorp_bathing'
-description 'ported from rsg-bathing by xv-scripts'
+name 'redm_bathing'
+description 'ported from rsg-bathing by unRealXV'
 version '1.0.0'
 
 shared_scripts {

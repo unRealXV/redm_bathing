@@ -12,8 +12,8 @@ local function IsPlayerNearBath(src, town, maxDistance)
     return #(playerCoords - zone.consumer) <= (maxDistance or 3.0)
 end
 
-RegisterServerEvent('vorp-bathing:server:canEnterBath')
-AddEventHandler('vorp-bathing:server:canEnterBath', function(town)
+RegisterServerEvent('redm-bathing:server:canEnterBath')
+AddEventHandler('redm-bathing:server:canEnterBath', function(town)
     local src = source
     if not Config.BathingZones[town] then return end
 
@@ -29,18 +29,18 @@ AddEventHandler('vorp-bathing:server:canEnterBath', function(town)
         if currentMoney >= Config.NormalBathPrice then
             Character.removeCurrency(0, Config.NormalBathPrice)
             BathingSessions[town] = src
-            TriggerClientEvent('vorp-bathing:client:ToggleInvincibility', src, true)
-            TriggerClientEvent('vorp-bathing:client:StartBath', src, town)
+            TriggerClientEvent('redm-bathing:client:ToggleInvincibility', src, true)
+            TriggerClientEvent('redm-bathing:client:StartBath', src, town)
         else
-            TriggerClientEvent('vorp-bathing:client:notify', src, locale('notify_not_enough_money'))
+            TriggerClientEvent('redm-bathing:client:notify', src, locale('notify_not_enough_money'))
         end
     else
-        TriggerClientEvent('vorp-bathing:client:notify', src, locale('notify_occupied'))
+        TriggerClientEvent('redm-bathing:client:notify', src, locale('notify_occupied'))
     end
 end)
 
-RegisterServerEvent('vorp-bathing:server:canEnterDeluxeBath')
-AddEventHandler('vorp-bathing:server:canEnterDeluxeBath', function(town)
+RegisterServerEvent('redm-bathing:server:canEnterDeluxeBath')
+AddEventHandler('redm-bathing:server:canEnterDeluxeBath', function(town)
     local src = source
     if not Config.BathingZones[town] then return end
     if BathingSessions[town] == src then
@@ -53,19 +53,19 @@ AddEventHandler('vorp-bathing:server:canEnterDeluxeBath', function(town)
 
         if currentMoney >= Config.DeluxeBathPrice then
             Character.removeCurrency(0, Config.DeluxeBathPrice)
-            TriggerClientEvent('vorp-bathing:client:StartDeluxeBath', src, town)
+            TriggerClientEvent('redm-bathing:client:StartDeluxeBath', src, town)
         else
-            TriggerClientEvent('vorp-bathing:client:notify', src, locale('notify_not_enough_money'))
-            TriggerClientEvent('vorp-bathing:client:HideDeluxePrompt', src)
+            TriggerClientEvent('redm-bathing:client:notify', src, locale('notify_not_enough_money'))
+            TriggerClientEvent('redm-bathing:client:HideDeluxePrompt', src)
         end
     end
 end)
 
-RegisterServerEvent('vorp-bathing:server:setBathAsFree')
-AddEventHandler('vorp-bathing:server:setBathAsFree', function(town)
+RegisterServerEvent('redm-bathing:server:setBathAsFree')
+AddEventHandler('redm-bathing:server:setBathAsFree', function(town)
     if BathingSessions[town] == source then
         BathingSessions[town] = nil
-        TriggerClientEvent('vorp-bathing:client:ToggleInvincibility', source, false)
+        TriggerClientEvent('redm-bathing:client:ToggleInvincibility', source, false)
     end
 end)
 
@@ -78,14 +78,14 @@ AddEventHandler('playerDropped', function()
     end
 end)
 
-RegisterServerEvent('vorp-bathing:server:setCleanliness')
-AddEventHandler('vorp-bathing:server:setCleanliness', function(value)
+RegisterServerEvent('redm-bathing:server:setCleanliness')
+AddEventHandler('redm-bathing:server:setCleanliness', function(value)
 end)
 
 AddEventHandler('onResourceStop', function(resource)
     if resource == GetCurrentResourceName() then
         for town, player in pairs(BathingSessions) do
-            TriggerClientEvent('vorp-bathing:client:ToggleInvincibility', player, false)
+            TriggerClientEvent('redm-bathing:client:ToggleInvincibility', player, false)
         end
         BathingSessions = {}
     end
